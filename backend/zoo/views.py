@@ -22,10 +22,6 @@ class AnimalViewSet(viewsets.ModelViewSet):
     queryset = Animal.objects.all()
     serializer_class = AnimalSerializer
 
-    def get_permissions(self):
-        if self.action in ["create", "update", "destroy"]:
-            self.permission_classes = [IsAuthenticated, IsZookeeper]
-        return super().get_permissions()
 
 class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()

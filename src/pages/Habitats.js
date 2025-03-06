@@ -1,61 +1,46 @@
 import React, { useState, useEffect } from "react";
-import { fetchHabitats, addHabitat } from "../api";
+import { getHabitats, addHabitat } from "../api"; // ✅ Correct API imports
+import HabitatForm from "../components/HabitatForm";
 
-const Habitats = () => {
+function Habitats() {
     const [habitats, setHabitats] = useState([]);
-    const [name, setName] = useState(""); // ✅ Define name
-    const [description, setDescription] = useState(""); // ✅ Define description
 
-    useEffect(() => {
-        fetchHabitats()
+    // ✅ Define function BEFORE useEffect calls it
+    const fetchAllHabitats = () => {
+        getHabitats()
             .then((response) => setHabitats(response.data))
             .catch((error) => console.error("Error fetching habitats:", error));
+    };
+
+    useEffect(() => {
+        fetchAllHabitats();
     }, []);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const habitatData = { name, description };
-
-        console.log("Submitting Habitat:", habitatData); // Debugging log
-
+    const handleAddHabitat = (habitatData) => {
         addHabitat(habitatData)
-            .then((response) => {
-                console.log("API Response:", response.data);
-                setHabitats([...habitats, response.data]);
-                setName(""); // ✅ Reset input
-                setDescription(""); // ✅ Reset input
-            })
-            .catch((error) => {
-                console.error("Error adding habitat:", error.response?.data || error);
-            });
+            .then(() => fetchAllHabitats()) // ✅ Refresh the list after adding
+            .catch((error) => console.error("Error adding habitat:", error.response?.data || error));
     };
 
     return (
         <div>
-            <h2>Habitats</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Habitat Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-                <button type="submit">Add Habitat</button>
-            </form>
-            <ul>
-                {habitats.map((habitat) => (
-                    <li key={habitat.id}>{habitat.name} - {habitat.description}</li>
-                ))}
-            </ul>
+            <h2>🌿 Habitat Management</h2>
+            <HabitatForm onAddHabitat={handleAddHabitat} />
+
+            <h3>Existing Habitats</h3>
+            {habitats.length > 0 ? (
+                <ul>
+                    {habitats.map((habitat) => (
+                        <li key={habitat.id}>
+                            <strong>{habitat.name}</strong> - {habitat.description}
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No habitats found.</p>
+            )}
         </div>
     );
-};
+}
 
 export default Habitats;

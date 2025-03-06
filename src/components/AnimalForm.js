@@ -1,65 +1,88 @@
 import React, { useState, useEffect } from "react";
-import { fetchHabitats, fetchSpecies } from "../api"; // To populate dropdowns
+import { getHabitats, getSpecies, addAnimal } from "../api";  // ✅ Fetch from API
 
 function AnimalForm({ onAddAnimal }) {
-  const [name, setName] = useState("");
-  const [lifespan, setLifespan] = useState("");
-  const [habitat, setHabitat] = useState("");
-  const [species, setSpecies] = useState("");
-  const [habitats, setHabitats] = useState([]);
-  const [speciesList, setSpeciesList] = useState([]);
+    const [name, setName] = useState("");
+    const [lifeSpan, setLifeSpan] = useState("");
+    const [speciesList, setSpeciesList] = useState([]);
+    const [habitatList, setHabitatList] = useState([]);
+    const [selectedSpecies, setSelectedSpecies] = useState("");
+    const [selectedHabitat, setSelectedHabitat] = useState("");
 
-  useEffect(() => {
-    fetchHabitats().then((response) => setHabitats(response.data));
-    fetchSpecies().then((response) => setSpeciesList(response.data));
-  }, []);
+    // ✅ Fetch habitats and species when the form loads
+    useEffect(() => {
+        getHabitats().then((response) => setHabitatList(response.data));
+        getSpecies().then((response) => setSpeciesList(response.data));
+    }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!name.trim() || !lifespan.trim() || !habitat || !species) return;
-    onAddAnimal({ name, lifespan, habitat, species });
-    setName("");
-    setLifespan("");
-    setHabitat("");
-    setSpecies("");
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Animal Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Lifespan (years)"
-        value={lifespan}
-        onChange={(e) => setLifespan(e.target.value)}
-      />
+        // ✅ Ensure all fields are filled before submission
+        if (!name.trim() || !selectedSpecies || !selectedHabitat || !lifeSpan) {
+            alert("Please fill in all fields before adding an animal.");
+            return;
+        }
 
-      <select value={habitat} onChange={(e) => setHabitat(e.target.value)}>
-        <option value="">Select Habitat</option>
-        {habitats.map((h) => (
-          <option key={h.id} value={h.id}>
-            {h.name}
-          </option>
-        ))}
-      </select>
+        const newAnimal = {
+            name,
+            species: selectedSpecies,
+            habitat: selectedHabitat,
+            life_span: lifeSpan,
+        };
 
-      <select value={species} onChange={(e) => setSpecies(e.target.value)}>
-        <option value="">Select Species</option>
-        {speciesList.map((s) => (
-          <option key={s.id} value={s.id}>
-            {s.name}
-          </option>
-        ))}
-      </select>
+        addAnimal(newAnimal)
+            .then(() => {
+                onAddAnimal(newAnimal);  // ✅ Refresh the list
+                setName("");
+                setLifeSpan("");
+                setSelectedSpecies("");
+                setSelectedHabitat("");
+            })
+            .catch((error) => console.error("Error adding animal:", error));
+    };
 
-      <button type="submit">Add Animal</button>
-    </form>
-  );
+    return (
+        <form onSubmit={handleSubmit}>
+            <h3>🐾 Add New Animal</h3>
+            <input
+                type="text"
+                placeholder="Animal Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+            />
+            <input
+                type="number"
+                placeholder="Life Span (years)"
+                value={lifeSpan}
+                onChange={(e) => setLifeSpan(e.target.value)}
+                required
+            />
+
+            {/* ✅ Dropdown for Species */}
+            <select value={selectedSpecies} onChange={(e) => setSelectedSpecies(e.target.value)} required>
+                <option value="">Select Species</option>
+                {speciesList.map((species) => (
+                    <option key={species.id} value={species.id}>
+                        {species.name}
+                    </option>
+                ))}
+            </select>
+
+            {/* ✅ Dropdown for Habitat */}
+            <select value={selectedHabitat} onChange={(e) => setSelectedHabitat(e.target.value)} required>
+                <option value="">Select Habitat</option>
+                {habitatList.map((habitat) => (
+                    <option key={habitat.id} value={habitat.id}>
+                        {habitat.name}
+                    </option>
+                ))}
+            </select>
+
+            <button type="submit">✅ Add Animal</button>
+        </form>
+    );
 }
 
 export default AnimalForm;
