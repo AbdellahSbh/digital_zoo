@@ -1,40 +1,44 @@
-/* 🔥 Stylish Navbar */
+/* 🔹 Navbar Styling */
 .navbar {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  padding: 15px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: #388E3C;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* 🌟 Navbar Links */
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navbar li {
+  display: inline-block;
+}
+
 .navbar a {
   color: white;
   text-decoration: none;
   font-size: 18px;
-  margin: 0 15px;
-  padding: 8px 15px;
+  padding: 10px 15px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
-/* 🔥 Cool Hover Effect */
+/* 🎭 Hover Effects */
 .navbar a:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* 📱 Responsive Navbar */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    text-align: center;
-  }
+/* 🔹 Guest Mode Highlight */
+.guest-mode a {
+  background: #FF9800;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
 
-  .navbar a {
-    display: block;
-    margin: 8px 0;
-  }
+.guest-mode a:hover {
+  background: #E68900;
 }

@@ -1,18 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./Dashboard.css"; // ✅ Ensure you create this file
+import { useNavigate } from "react-router-dom";
+import "./Dashboard.css";
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   return (
     <div className="dashboard-container">
-      <h1>🐾 Welcome to the Digital Zoo</h1>
-      <p>Manage all the zoo information from this dashboard.</p>
+      <h1>🐾 Welcome to Our Digital Zoo</h1>
+      <p>Explore our memberships, events, and manage the zoo!</p>
 
-      <div className="dashboard-links">
-        <Link to="/animals" className="dashboard-button">Manage Animals</Link>
-        <Link to="/habitats" className="dashboard-button">Manage Habitats</Link>
-        <Link to="/species" className="dashboard-button">Manage Species</Link>
-        <Link to="/feeding" className="dashboard-button">Manage Feeding Schedules</Link>
+      <div className="dashboard-grid">
+        <button className="dashboard-button" onClick={() => navigate("/guest")}>
+          👤 Enter as Guest
+        </button>
+        <button className="dashboard-button" onClick={() => navigate("/tickets")}>
+          📅 View & Book Events
+        </button>
+        <button className="dashboard-button" onClick={() => navigate("/zookeeper")}>
+          🦺 Manage Zoo
+        </button>
+        <button className="dashboard-button" onClick={() => navigate("/memberships")}>
+          🎟 Zoo Memberships
+        </button>
+        <button className="dashboard-button" onClick={() => navigate("/events")}>
+          🎉 Special Events
+        </button>
+        <button className="dashboard-button" onClick={() => navigate("/event-bookings")}>
+          📝 Event Bookings
+        </button>
       </div>
     </div>
   );
