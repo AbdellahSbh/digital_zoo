@@ -1,0 +1,50 @@
+/* ✅ Memberships Page */
+.memberships-container {
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: center;
+    background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+/* ✅ Membership List */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+/* ✅ Form */
+form {
+    margin-top: 20px;
+}
+
+input, select, button {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    background: #ff6f61;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #ff3f31;
+}

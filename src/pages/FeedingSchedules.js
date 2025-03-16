@@ -1,45 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { getFeedingSchedules, addFeedingSchedule } from "../api"; // ✅ Corrected import
-import FeedingForm from "../components/FeedingForm";
+import React, { useEffect, useState } from "react";
+import { getAnimals, addFeedingSchedule } from "../api";
 
-function FeedingSchedules() {
-    const [feedings, setFeedings] = useState([]);
+function FeedingForm({ onAddFeeding }) {
+  const [animalList, setAnimalList] = useState([]);  // ✅ Ensure it's always an array
+  const [feeding, setFeeding] = useState({ animal: "", time: "", food: "" });
 
-    useEffect(() => {
-        fetchFeedingData();
-    }, []);
+  useEffect(() => {
+    getAnimals()
+      .then((data) => {
+        console.log("✅ Animals API Response:", data);
+        setAnimalList(Array.isArray(data) ? data : []);  // ✅ Ensures it's always an array
+      })
+      .catch((error) => console.error("❌ Error fetching animals:", error));
+  }, []);
 
-    const fetchFeedingData = () => {
-        getFeedingSchedules()
-            .then((response) => setFeedings(response.data))
-            .catch((error) => console.error("Error fetching feeding schedules:", error));
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddFeeding(feeding);
+    setFeeding({ animal: "", time: "", food: "" });
+  };
 
-    const handleAddFeeding = (feeding) => {
-        addFeedingSchedule(feeding)
-            .then(() => fetchFeedingData()) // ✅ Refresh the list after adding
-            .catch((error) => console.error("Error adding feeding:", error));
-    };
+  return (
+    <form onSubmit={handleSubmit}>
+      <h3>🍽 Add Feeding Schedule</h3>
 
-    return (
-        <div>
-            <h2>🍽 Feeding Schedules</h2>
-            <FeedingForm onAddFeeding={handleAddFeeding} />
-            
-            <h3>Scheduled Feedings</h3>
-            {feedings.length > 0 ? (
-                <ul>
-                    {feedings.map((feeding) => (
-                        <li key={feeding.id}>
-                            <strong>{feeding.animal.name}</strong> - {feeding.time} - {feeding.food}
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No feeding schedules found.</p>
-            )}
-        </div>
-    );
+      <select value={feeding.animal} onChange={(e) => setFeeding({ ...feeding, animal: e.target.value })} required>
+        <option value="">Select an Animal</option>
+        {animalList.length > 0 ? (
+          animalList.map((animal) => (
+            <option key={animal.id} value={animal.id}>{animal.name}</option>
+          ))
+        ) : (
+          <option disabled>❌ No animals available</option>
+        )}
+      </select>
+
+      <input type="time" value={feeding.time} onChange={(e) => setFeeding({ ...feeding, time: e.target.value })} required />
+      <input type="text" placeholder="Food" value={feeding.food} onChange={(e) => setFeeding({ ...feeding, food: e.target.value })} required />
+      <button type="submit">✅ Add Feeding</button>
+    </form>
+  );
 }
 
-export default FeedingSchedules;
+export default FeedingForm;

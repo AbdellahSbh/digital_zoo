@@ -1,0 +1,50 @@
+/* ✅ Zookeeper Container */
+.zookeeper-container {
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: center;
+    background: #2a2a72;
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ Title */
+.zookeeper-container h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+/* ✅ Subtitle */
+.zookeeper-container p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+/* ✅ Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+/* ✅ Dashboard Cards */
+.dashboard-card {
+    background: #3b3b98;
+    padding: 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: 0.3s ease-in-out;
+}
+
+/* ✅ Hover Effects */
+.dashboard-card:hover {
+    transform: scale(1.05);
+    background: #575fcf;
+}

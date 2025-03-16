@@ -1,75 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { getTickets, addTicket } from "../api"; // ✅ Correct API imports
+import React, { useState } from "react";
+import "./Tickets.css";
 
 function Tickets() {
-    const [tickets, setTickets] = useState([]);
-    const [visitorName, setVisitorName] = useState("");
-    const [expiryDate, setExpiryDate] = useState("");
+  const [visitor, setVisitor] = useState({ name: "", event: "", date: "" });
+  const eventsList = ["Animal Feeding", "Night Safari", "Kids Adventure", "Wildlife Talks"];
 
-    // ✅ Define function BEFORE useEffect calls it
-    const fetchAllTickets = () => {
-        getTickets()
-            .then((response) => setTickets(response.data))
-            .catch((error) => console.error("Error fetching tickets:", error));
-    };
+  const handleBooking = (e) => {
+    e.preventDefault();
+    console.log("Booking Ticket:", visitor);
+    alert(`Ticket booked for ${visitor.name} on ${visitor.date} for ${visitor.event}!`);
+  };
 
-    useEffect(() => {
-        fetchAllTickets();
-    }, []);
+  return (
+    <div className="tickets-container">
+      <h2>📅 Upcoming Zoo Events</h2>
+      <ul>
+        {eventsList.map((event, index) => (
+          <li key={index}>{event}</li>
+        ))}
+      </ul>
 
-    const handleAddTicket = (e) => {
-        e.preventDefault();
-        const newTicket = {
-            visitor: visitorName,
-            expiry_date: expiryDate,
-        };
-
-        addTicket(newTicket)
-            .then(() => {
-                fetchAllTickets(); // ✅ Refresh list after adding
-                setVisitorName(""); 
-                setExpiryDate(""); 
-            })
-            .catch((error) => console.error("Error adding ticket:", error.response?.data || error));
-    };
-
-    return (
-        <div>
-            <h2>🎟 Ticket Management</h2>
-
-            {/* ✅ Ticket Form */}
-            <form onSubmit={handleAddTicket}>
-                <input
-                    type="text"
-                    placeholder="Visitor Name"
-                    value={visitorName}
-                    onChange={(e) => setVisitorName(e.target.value)}
-                    required
-                />
-                <input
-                    type="date"
-                    placeholder="Expiry Date"
-                    value={expiryDate}
-                    onChange={(e) => setExpiryDate(e.target.value)}
-                    required
-                />
-                <button type="submit">✅ Issue Ticket</button>
-            </form>
-
-            <h3>Existing Tickets</h3>
-            {tickets.length > 0 ? (
-                <ul>
-                    {tickets.map((ticket) => (
-                        <li key={ticket.id}>
-                            🎫 <strong>Visitor:</strong> {ticket.visitor} | <strong>Expires:</strong> {ticket.expiry_date}
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No tickets found.</p>
-            )}
-        </div>
-    );
+      <h3>🎟 Book a Ticket</h3>
+      <form onSubmit={handleBooking}>
+        <input type="text" placeholder="Your Name" value={visitor.name} onChange={(e) => setVisitor({ ...visitor, name: e.target.value })} required />
+        <select value={visitor.event} onChange={(e) => setVisitor({ ...visitor, event: e.target.value })} required>
+          <option value="">Select an Event</option>
+          {eventsList.map((event, index) => (
+            <option key={index} value={event}>{event}</option>
+          ))}
+        </select>
+        <input type="date" value={visitor.date} onChange={(e) => setVisitor({ ...visitor, date: e.target.value })} required />
+        <button type="submit">Book Now</button>
+      </form>
+    </div>
+  );
 }
 
 export default Tickets;

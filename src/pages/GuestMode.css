@@ -1,0 +1,43 @@
+/* ✅ Guest Mode Container */
+.guest-container {
+    max-width: 900px;
+    margin: 50px auto;
+    text-align: center;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+    color: black !important;  /* ✅ Force text to black */
+}
+
+/* ✅ Title */
+.guest-container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black !important;  /* ✅ Ensure title is black */
+}
+
+/* ✅ Lists */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+/* ✅ List Items */
+ul li {
+    background: rgba(255, 255, 255, 0.85);  /* ✅ Make it brighter */
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: black !important;  /* ✅ Force text to black */
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+/* ✅ Hover Effect */
+ul li:hover {
+    background: rgba(255, 255, 255, 1);  /* ✅ Fully white background */
+    transform: scale(1.02);
+}
