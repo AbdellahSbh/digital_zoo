@@ -19,7 +19,7 @@ from django.http import JsonResponse
 from .models import CustomUser
 from rest_framework import status
 
-# ✅ Animal, Habitat, and Species ViewSets
+
 class AnimalViewSet(viewsets.ModelViewSet):
     queryset = Animal.objects.all()
     serializer_class = AnimalSerializer
@@ -32,26 +32,26 @@ class SpeciesViewSet(viewsets.ModelViewSet):
     queryset = Species.objects.all()
     serializer_class = SpeciesSerializer
 
-# ✅ Feeding Schedule
+
 class FeedingScheduleViewSet(viewsets.ModelViewSet):
     queryset = FeedingSchedule.objects.all()
     serializer_class = FeedingScheduleSerializer
 
-# ✅ Ticket Management
+
 class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
  
 
-# ✅ Zookeeper Management
+
 class ZookeeperViewSet(viewsets.ModelViewSet):
     queryset = Zookeeper.objects.all()
     serializer_class = ZookeeperSerializer
 
-    # ✅ Fetch only zookeepers with <5 assigned animals
 
 
-# ✅ Care Routine Management
+
+
 class CareRoutineViewSet(viewsets.ModelViewSet):
     queryset = CareRoutine.objects.all()
     serializer_class = CareRoutineSerializer
@@ -61,26 +61,23 @@ class MembershipViewSet(viewsets.ModelViewSet):
     serializer_class = MembershipSerializer
 
     def create(self, request, *args, **kwargs):
-        print("🔎 Incoming Request Data:", request.data)  # ✅ Debugging Log
+        print(" Incoming Request Data:", request.data) 
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        print("❌ Validation Error:", serializer.errors)  # ✅ Debugging Log
+        print("❌ Validation Error:", serializer.errors) 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# ✅ Membership Tiers View
 class MembershipTierViewSet(viewsets.ModelViewSet):
     queryset = MembershipTier.objects.all()
     serializer_class = MembershipTierSerializer
 
 
-# ✅ Special Events View
 class SpecialEventViewSet(viewsets.ModelViewSet):
     queryset = SpecialEvent.objects.all()
     serializer_class = SpecialEventSerializer
 
-# ✅ Event Booking View
 class EventBookingViewSet(viewsets.ModelViewSet):
     queryset = EventBooking.objects.all()
     serializer_class = EventBookingSerializer
@@ -88,18 +85,15 @@ class EventBookingViewSet(viewsets.ModelViewSet):
 from .models import MembershipTier, SpecialEvent
 from .serializers import MembershipTierSerializer, SpecialEventSerializer
 
-# ✅ Membership Tier ViewSet
 class MembershipTierViewSet(viewsets.ModelViewSet):
     queryset = MembershipTier.objects.all()
     serializer_class = MembershipTierSerializer
 
-# ✅ Special Events ViewSet
 class SpecialEventViewSet(viewsets.ModelViewSet):
     queryset = SpecialEvent.objects.all()
     serializer_class = SpecialEventSerializer
 
 
-# ✅ Authentication Views
 @api_view(["POST"])
 def login(request):
     username = request.data.get("username")
@@ -116,7 +110,7 @@ def login(request):
 def register(request):
     username = request.data.get("username")
     password = request.data.get("password")
-    role = request.data.get("role", "visitor")  # Default to visitor
+    role = request.data.get("role", "visitor") 
 
     if CustomUser.objects.filter(username=username).exists():
         return Response({"error": "Username already taken"}, status=400)
