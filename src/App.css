@@ -1,4 +1,4 @@
-/* ✅ General App Styling */
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -6,7 +6,7 @@ body {
   padding: 0;
 }
 
-/* ✅ Centering the Main Container */
+
 .container {
   max-width: 900px;
   margin: auto;
@@ -16,7 +16,6 @@ body {
   border-radius: 10px;
 }
 
-/* ✅ Styling Forms */
 form {
   background: #ffffff;
   padding: 20px;
@@ -37,7 +36,7 @@ input:focus, select:focus {
   outline: 2px solid #007bff;
 }
 
-/* ✅ Styling Buttons */
+
 button {
   background-color: #007bff;
   color: white;
@@ -50,7 +49,7 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* ✅ Improving List Display */
+
 ul {
   list-style: none;
   padding: 0;
@@ -66,7 +65,7 @@ li {
   align-items: center;
 }
 
-/* ✅ Delete Button Styling */
+
 .delete-button {
   background: red;
   color: white;
