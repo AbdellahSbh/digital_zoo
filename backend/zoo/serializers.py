@@ -36,7 +36,6 @@ class ZookeeperSerializer(serializers.ModelSerializer):
         model = Zookeeper
         fields = '__all__'
 
-# ✅ Fix: Ensure CareRoutineSerializer is added
 class CareRoutineSerializer(serializers.ModelSerializer):
     zookeeper = serializers.PrimaryKeyRelatedField(queryset=Zookeeper.objects.all()) 
     animal = serializers.PrimaryKeyRelatedField(queryset=Animal.objects.all()) 
@@ -52,19 +51,16 @@ class MembershipTierSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# ✅ Membership Serializer
 class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Membership
         fields = '__all__'
 
-# ✅ Special Event Serializer
 class SpecialEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpecialEvent
         fields = '__all__'
 
-# ✅ Event Booking Serializer
 class EventBookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventBooking
@@ -77,4 +73,4 @@ from .models import CustomUser
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ["id", "username", "email"]  # ✅ Include only necessary fields
+        fields = ["id", "username", "email"] 
