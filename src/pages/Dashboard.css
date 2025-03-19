@@ -1,4 +1,4 @@
-/* ✅ Dashboard Container */
+
 .dashboard-container {
   max-width: 900px;
   margin: 50px auto;
@@ -10,20 +10,20 @@
   color: white;
 }
 
-/* ✅ Heading */
+
 .dashboard-container h1 {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 15px;
 }
 
-/* ✅ Subtitle */
+
 .dashboard-container p {
   font-size: 1.2rem;
   opacity: 0.9;
 }
 
-/* ✅ Button Grid */
+
 .dashboard-grid {
   display: flex;
   justify-content: center;
@@ -32,7 +32,7 @@
   flex-wrap: wrap;
 }
 
-/* ✅ Buttons */
+
 .dashboard-button {
   background: white;
   color: #ff6b81;
@@ -46,7 +46,7 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ Hover Effects */
+
 .dashboard-button:hover {
   transform: translateY(-3px);
   background: #ff6b81;
