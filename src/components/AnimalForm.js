@@ -3,21 +3,21 @@ import { getSpecies, getHabitats, addAnimal } from "../api";
 
 function AnimalForm({ onAddAnimal }) {
   const [speciesList, setSpeciesList] = useState([]);  
-  const [habitatList, setHabitatList] = useState([]);  // ✅ Renamed from habitats → habitatList
+  const [habitatList, setHabitatList] = useState([]);  
   const [animal, setAnimal] = useState({ name: "", species: "", habitat: "", life_span: "" });
 
   useEffect(() => {
     getSpecies()
       .then((data) => {
         console.log("✅ Species Data:", data);  
-        setSpeciesList(data || []);  // ✅ Ensures it's always an array
+        setSpeciesList(data || []);  
       })
       .catch((error) => console.error("❌ Error fetching species:", error));
 
     getHabitats()
       .then((data) => {
         console.log("✅ Habitats Data:", data);
-        setHabitatList(data || []);  // ✅ Fix: Ensure it's always an array
+        setHabitatList(data || []);  
       })
       .catch((error) => console.error("❌ Error fetching habitats:", error));
   }, []);
