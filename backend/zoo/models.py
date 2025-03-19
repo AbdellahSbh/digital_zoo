@@ -100,14 +100,14 @@ class MembershipTier(models.Model):
     ]
     
     name = models.CharField(max_length=50, choices=TIER_CHOICES, unique=True)
-    price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)  # Price of the membership
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)  
 
     def __str__(self):
         return self.name
 
 
 class Membership(models.Model):
-    visitor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # ✅ Fixed user reference
+    visitor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) 
     tier = models.ForeignKey("MembershipTier", on_delete=models.CASCADE)
     start_date = models.DateField(auto_now_add=True)
     end_date = models.DateField()
@@ -118,7 +118,7 @@ class Membership(models.Model):
 
 
 
-# ✅ Special Events
+
 class SpecialEvent(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -129,7 +129,6 @@ class SpecialEvent(models.Model):
     def __str__(self):
         return self.name
 
-# ✅ Event Bookings (Visitors Register for Events)
 class EventBooking(models.Model):
     visitor = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
     event = models.ForeignKey(SpecialEvent, on_delete=models.CASCADE)
