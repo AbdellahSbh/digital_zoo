@@ -5,9 +5,9 @@ function SpeciesForm({ onAddSpecies }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name.trim()) return; // ✅ Prevents empty submission
-    onAddSpecies({ name }); // ✅ Sends data to parent function
-    setName(""); // ✅ Clears input field
+    if (!name.trim()) return; 
+    onAddSpecies({ name });
+    setName("");
   };
 
   return (
