@@ -6,8 +6,8 @@ function HabitatForm({ onAddHabitat }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name.trim()) return; // Prevent empty submission
-    onAddHabitat({ name, description }); // ✅ Calls parent function
+    if (!name.trim()) return; 
+    onAddHabitat({ name, description }); 
     setName("");
     setDescription("");
   };
