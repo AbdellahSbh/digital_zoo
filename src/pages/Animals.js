@@ -8,8 +8,8 @@ function Animals() {
   useEffect(() => {
     getAnimals()
       .then((response) => {
-        console.log("✅ Animals API Response:", response.data);  // ✅ Debugging log
-        setAnimals(response.data || []);  // ✅ Ensures it's always an array
+        console.log("✅ Animals API Response:", response.data);  // Debugging log
+        setAnimals(response.data || []);  
       })
       .catch((error) => console.error("❌ Error fetching animals:", error));
   }, []);
