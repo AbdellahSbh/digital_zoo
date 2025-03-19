@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { getAnimals, addFeedingSchedule } from "../api";
 
 function FeedingForm({ onAddFeeding }) {
-  const [animalList, setAnimalList] = useState([]);  // ✅ Ensure it's always an array
+  const [animalList, setAnimalList] = useState([]);  
   const [feeding, setFeeding] = useState({ animal: "", time: "", food: "" });
 
   useEffect(() => {
     getAnimals()
       .then((data) => {
         console.log("✅ Animals API Response:", data);
-        setAnimalList(Array.isArray(data) ? data : []);  // ✅ Ensures it's always an array
+        setAnimalList(Array.isArray(data) ? data : []);  
       })
       .catch((error) => console.error("❌ Error fetching animals:", error));
   }, []);
