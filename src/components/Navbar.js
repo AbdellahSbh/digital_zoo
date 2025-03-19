@@ -10,7 +10,7 @@ function Navbar() {
             <ul>
                 <li><Link to="/">🏡 Dashboard</Link></li>
 
-                {/* ✅ Show These Pages Only for Admins */}
+                {/*  Show These Pages Only for Admins */}
                 {role === "admin" && <>
                     <li><Link to="/animals">🦁 Animals</Link></li>
                     <li><Link to="/habitats">🌿 Habitats</Link></li>
@@ -19,10 +19,10 @@ function Navbar() {
                     <li><Link to="/tickets">🎟 Tickets</Link></li>
                 </>}
 
-                {/* ✅ Zookeepers Can See Their Assigned Tasks */}
+                {/* Zookeepers Can See Their Assigned Tasks */}
                 {(role === "admin" || role === "zookeeper") && <li><Link to="/care-routines">📅 Care Routines</Link></li>}
 
-                {/* ✅ Guest Mode for Visitors */}
+                {/* Guest Mode for Visitors */}
                 <li><Link to="/guest">👤 Guest Mode</Link></li>
             </ul>
         </nav>
