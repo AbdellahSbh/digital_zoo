@@ -1,36 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { getMembershipTiers } from "../api";  
-import "./Memberships.css";
+import { getMemberships } from "../api"; // import API call
 
 function Memberships() {
-  const [tiers, setTiers] = useState([]);
+    const [memberships, setMemberships] = useState([]); // Initialize as an empty array
 
-  useEffect(() => {
-    getMembershipTiers()
-      .then((response) => {
-        console.log("✅ Membership Tiers:", response.data);  // ✅ Debugging log
-        setTiers(response.data);
-      })
-      .catch((error) => console.error("❌ Error fetching membership tiers:", error));
-  }, []);
+    useEffect(() => {
+        getMemberships()
+            .then((data) => {
+                console.log("✅ Memberships API Response:", data);
+                setMemberships(Array.isArray(data) ? data : []); // Ensure it's an array
+            })
+            .catch((error) => {
+                console.error("❌ Error fetching memberships:", error);
+                setMemberships([]); // Set empty array to prevent crashes
+            });
+    }, []);
 
-  return (
-    <div className="memberships-container">
-      <h2>🎟 Available Zoo Memberships</h2>
-      {tiers.length > 0 ? (
-        <ul>
-          {tiers.map((tier) => (
-            <li key={tier.id}>
-              <strong>{tier.name}</strong> - ${tier.cost}
-              <p>{tier.benefits}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>❌ No memberships found. Try adding one.</p>
-      )}
-    </div>
-  );
+    return (
+        <div>
+            <h2>Memberships</h2>
+            {memberships.length > 0 ? (
+                <ul>
+                    {memberships.map((membership) => (
+                        <li key={membership.id}>
+                            {membership.visitor} - {membership.tier} - Expires: {membership.end_date}
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No memberships available.</p> 
+            )}
+        </div>
+    );
 }
 
 export default Memberships;

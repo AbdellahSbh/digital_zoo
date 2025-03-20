@@ -1,4 +1,4 @@
-/* ✅ Guest Mode Container */
+ /* ✅ Guest Mode Container 
 .guest-container {
     max-width: 900px;
     margin: 50px auto;
@@ -7,37 +7,95 @@
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
-    color: black !important;  /* ✅ Force text to black */
+    color: black !important;  
 }
 
-/* ✅ Title */
 .guest-container h2 {
     font-size: 2rem;
     font-weight: bold;
-    color: black !important;  /* ✅ Ensure title is black */
+    color: black !important;  
 }
 
-/* ✅ Lists */
 ul {
     list-style: none;
     padding: 0;
     margin-top: 20px;
 }
 
-/* ✅ List Items */
 ul li {
-    background: rgba(255, 255, 255, 0.85);  /* ✅ Make it brighter */
+    background: rgba(255, 255, 255, 0.85);
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 10px;
     font-size: 18px;
-    color: black !important;  /* ✅ Force text to black */
+    color: black !important;
     font-weight: bold;
     transition: all 0.3s ease-in-out;
 }
 
-/* ✅ Hover Effect */
 ul li:hover {
-    background: rgba(255, 255, 255, 1);  /* ✅ Fully white background */
+    background: rgba(255, 255, 255, 1); 
     transform: scale(1.02);
-}
+}  */
+
+.guest-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .habitats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .habitat-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f9f9f9;
+  }
+  
+  .habitat-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .habitat-button:hover {
+    background-color: #45a049;
+  }
+  
+  .habitat-button.active {
+    background-color: #2E7D32;
+  }
+  
+  .habitat-description {
+    margin: 8px 0;
+    color: #666;
+  }
+  
+  .habitat-animals {
+    margin-top: 12px;
+    padding: 12px;
+    border-left: 4px solid #4CAF50;
+    background-color: #f1f8e9;
+  }
+  
+  .animals-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .animals-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
