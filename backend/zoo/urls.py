@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (
     AnimalViewSet, HabitatViewSet, SpeciesViewSet, TicketViewSet, 
-    FeedingScheduleViewSet, ZookeeperViewSet, CareRoutineViewSet,available_zookeepers,SpecialEventViewSet,MembershipTierViewSet, MembershipViewSet, EventBookingViewSet
+    FeedingScheduleViewSet, ZookeeperViewSet, CareRoutineViewSet,available_zookeepers,SpecialEventViewSet,MembershipTierViewSet, MembershipViewSet, EventBookingViewSet,LoginAPIView
 )
 from .models import Zookeeper, CareRoutine
 from .serializers import ZookeeperSerializer, CareRoutineSerializer
@@ -26,5 +26,6 @@ router.register(r'membership_tiers', MembershipTierViewSet)
 urlpatterns = [
     path('api/', include(router.urls)),
     path('api/zookeepers/available/', available_zookeepers, name="available-zookeepers"),
+    path('api/login/', LoginAPIView.as_view(), name='login'),
 ]
 

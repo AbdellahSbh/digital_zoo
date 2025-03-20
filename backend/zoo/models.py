@@ -13,7 +13,6 @@ class Species(models.Model):
 class Habitat(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-
     def __str__(self):
         return self.name
 
@@ -54,8 +53,6 @@ class CustomUser(AbstractUser):
         related_name="customuser_set", 
         blank=True
     )
-
-
 class Ticket(models.Model):
     visitor = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     issue_date = models.DateTimeField(auto_now_add=True)

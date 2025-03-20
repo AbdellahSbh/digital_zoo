@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Animal, Habitat, Species, FeedingSchedule, Ticket, Zookeeper, CareRoutine
-from .models import MembershipTier, Membership, SpecialEvent, EventBooking
+from .models import MembershipTier, Membership, SpecialEvent, EventBooking,CustomUser
 
 class AnimalSerializer(serializers.ModelSerializer):
     class Meta:
@@ -68,9 +68,9 @@ class EventBookingSerializer(serializers.ModelSerializer):
 
 
 
-from .models import CustomUser
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ["id", "username", "email"] 
+        fields = ["id", "username", "email","role"] 
